@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhiudk6u5gh7d"]
+
+[ext_resource type="Script" uid="uid://1pxppycgpamc" path="res://ChildScenes/customerSpot.gd" id="1_0hlkf"]
+[ext_resource type="PackedScene" uid="uid://bnb2g3d26xqdl" path="res://ChildScenes/itemSprite.tscn" id="2_c1kyl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hlkf"]
+size = Vector2(172, 162)
+
+[node name="Node2D" type="Area2D"]
+collision_layer = 3
+script = ExtResource("1_0hlkf")
+
+[node name="itemSprite" parent="." instance=ExtResource("2_c1kyl")]
+z_index = 2
+
+[node name="customerChair" type="Node2D" parent="."]
+position = Vector2(0, 68)
+
+[node name="Marker2D" type="Marker2D" parent="customerChair"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 45)
+shape = SubResource("RectangleShape2D_0hlkf")

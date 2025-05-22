@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3 uid="uid://djhqb1g8o37cd"]
+
+[ext_resource type="Script" uid="uid://bqoj3250m062q" path="res://Scripts/game_end_scene.gd" id="1_jnnb5"]
+[ext_resource type="Texture2D" uid="uid://dcakfqgkndx6" path="res://Sprites/World/world1.png" id="2_wcnx8"]
+
+[node name="GameEnd" type="Node2D"]
+script = ExtResource("1_jnnb5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="bk" type="Sprite2D" parent="."]
+position = Vector2(372, 329)
+scale = Vector2(5, 5)
+texture = ExtResource("2_wcnx8")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 960.0
+offset_bottom = 540.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = -21.0
+offset_right = 218.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Number of Customers Served:"
+
+[node name="cs" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.62
+anchor_right = 0.5
+anchor_bottom = 0.62
+offset_left = -20.0
+offset_top = -27.5
+offset_right = 20.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "-1"
+
+[node name="mainMenuButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+offset_left = -72.0
+offset_top = -21.5
+offset_right = 72.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Main Menu"
+
+[connection signal="button_down" from="Control/mainMenuButton" to="." method="_on_main_menu_button_button_down"]

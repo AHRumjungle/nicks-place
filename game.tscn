@@ -1,0 +1,259 @@
+[gd_scene load_steps=26 format=3 uid="uid://c0fwmqyxixjb1"]
+
+[ext_resource type="Texture2D" uid="uid://c0slhilmbba7v" path="res://Sprites/World/world1/layer-0.png" id="1_eow3j"]
+[ext_resource type="PackedScene" uid="uid://cfijoqp7gdh7m" path="res://ChildScenes/player.tscn" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://b88ur3by5gkls" path="res://ChildScenes/itemSource.tscn" id="1_vef74"]
+[ext_resource type="PackedScene" uid="uid://cculndockjkrj" path="res://ChildScenes/itemProcesser.tscn" id="2_hve3p"]
+[ext_resource type="Texture2D" uid="uid://bi7cdfixs1r2m" path="res://Sprites/World/world1/layer-1.png" id="2_j5wjh"]
+[ext_resource type="Texture2D" uid="uid://bn852uymg5q8j" path="res://Sprites/World/world1/layer-2.png" id="3_vef74"]
+[ext_resource type="Texture2D" uid="uid://dtirpsfj4o5wp" path="res://Sprites/World/world1/layer-4.png" id="4_hve3p"]
+[ext_resource type="PackedScene" uid="uid://bhiudk6u5gh7d" path="res://ChildScenes/customerSpot.tscn" id="6_eow3j"]
+[ext_resource type="Script" uid="uid://c0ndhv3t1g6yl" path="res://Scripts/ui.gd" id="6_j5wjh"]
+[ext_resource type="Script" uid="uid://d0njiqo741vm5" path="res://Scripts/customer_handler.gd" id="7_j5wjh"]
+[ext_resource type="AudioStream" uid="uid://c1bfmf3udnlfc" path="res://Sounds/Effects/npcEnter.wav" id="10_mfdv2"]
+[ext_resource type="Script" uid="uid://8ovylj1pod5u" path="res://Scripts/game_handler.gd" id="12_iotsf"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j5wjh"]
+vertices = PackedVector2Array(220, 73, 436.5, 36, 710, 36, 710, 283, 440, 283, 436.5, -52, 220, -318, 411, -267.5, -16, -394.5, 710, -394.5, 710, -300.5, 411, -300.5, 710, -267.5, 710, -52, 104, -318, -16, -148, 104, 14.0078, -640, 15.0078, -710, -148, -710, 395, -640, 73, -598, 395, -598, 282.75, -320, 282.75, -143.25, 280.883, 440, 395, 135.25, 395, 135.25, 280.883, -143.25, 395, -320, 395)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 1, 0, 6, 7), PackedInt32Array(8, 9, 10, 11, 6), PackedInt32Array(7, 12, 13, 5), PackedInt32Array(11, 7, 6), PackedInt32Array(8, 6, 14), PackedInt32Array(15, 8, 14, 16), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(19, 18, 17, 20), PackedInt32Array(21, 19, 20, 22), PackedInt32Array(23, 22, 20, 0, 24), PackedInt32Array(0, 4, 25, 26, 27), PackedInt32Array(24, 28, 29, 23), PackedInt32Array(24, 0, 27)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-720, -405, 720, -405, 720, 405, -720, 405)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
+size = Vector2(694, 247)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(298, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iotsf"]
+size = Vector2(274.5, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc2xo"]
+size = Vector2(269.5, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_215e1"]
+size = Vector2(258.5, 112.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7sc4i"]
+size = Vector2(258, 112.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
+size = Vector2(1439, 73)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5wjh"]
+size = Vector2(1439.5, 111.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hve3p"]
+size = Vector2(115, 862)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfdv2"]
+size = Vector2(110, 655)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fc0e3"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vef74"]
+size = Vector2(125, 40.375)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="coffeeCups" parent="." instance=ExtResource("1_vef74")]
+position = Vector2(-429, -187)
+item = "emptyCoffee"
+hideItemSprite = true
+hideSourceSprite = true
+
+[node name="coffeeMachine" parent="." instance=ExtResource("2_hve3p")]
+position = Vector2(-597, -244)
+inputItem = "emptyCoffee"
+outputItem = "coffee"
+time = 3.0
+noProccesserSprite = true
+
+[node name="World" type="Node" parent="."]
+
+[node name="Ground" type="Sprite2D" parent="World"]
+z_index = -3
+texture = ExtResource("1_eow3j")
+
+[node name="BackWall" type="Sprite2D" parent="World"]
+z_index = -2
+texture = ExtResource("2_j5wjh")
+
+[node name="Bar" type="Sprite2D" parent="World"]
+z_index = -1
+texture = ExtResource("3_vef74")
+
+[node name="Tables" type="Sprite2D" parent="World"]
+z_index = 1
+texture = ExtResource("4_hve3p")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="World"]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_j5wjh")
+use_edge_connections = false
+
+[node name="WorldCollision" type="StaticBody2D" parent="World/NavigationRegion2D"]
+
+[node name="bar" type="CollisionPolygon2D" parent="World/NavigationRegion2D/WorldCollision"]
+polygon = PackedVector2Array(-630, 25, 114, 24, 114, -308, 210, -308, 210, 63, -630, 63)
+
+[node name="backWall" type="CollisionShape2D" parent="World/NavigationRegion2D/WorldCollision"]
+position = Vector2(-373, -281.5)
+shape = SubResource("RectangleShape2D_feb5d")
+
+[node name="entranceWall" type="CollisionShape2D" parent="World/NavigationRegion2D/WorldCollision"]
+position = Vector2(570, -284)
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="Table1" type="CollisionShape2D" parent="World/NavigationRegion2D/WorldCollision"]
+position = Vector2(583.75, -8)
+shape = SubResource("RectangleShape2D_iotsf")
+
+[node name="Table2" type="CollisionShape2D" parent="World/NavigationRegion2D/WorldCollision"]
+position = Vector2(584.75, 349)
+shape = SubResource("RectangleShape2D_lc2xo")
+
+[node name="Table3" type="CollisionShape2D" parent="World/NavigationRegion2D/WorldCollision"]
+position = Vector2(-4, 347)
+shape = SubResource("RectangleShape2D_215e1")
+
+[node name="Table4" type="CollisionShape2D" parent="World/NavigationRegion2D/WorldCollision"]
+position = Vector2(-459, 349)
+shape = SubResource("RectangleShape2D_7sc4i")
+
+[node name="Border" type="StaticBody2D" parent="World/NavigationRegion2D"]
+
+[node name="Down" type="CollisionShape2D" parent="World/NavigationRegion2D/Border"]
+position = Vector2(0.5, 441.5)
+shape = SubResource("RectangleShape2D_eow3j")
+
+[node name="Up" type="CollisionShape2D" parent="World/NavigationRegion2D/Border"]
+position = Vector2(0.25, -460.25)
+shape = SubResource("RectangleShape2D_j5wjh")
+
+[node name="Right" type="CollisionShape2D" parent="World/NavigationRegion2D/Border"]
+position = Vector2(778, -10)
+shape = SubResource("RectangleShape2D_hve3p")
+
+[node name="Left" type="CollisionShape2D" parent="World/NavigationRegion2D/Border"]
+position = Vector2(-775, 103.5)
+shape = SubResource("RectangleShape2D_mfdv2")
+
+[node name="PlayerBody" parent="." instance=ExtResource("1_fc0e3")]
+position = Vector2(7, 83)
+physics_material_override = SubResource("PhysicsMaterial_fc0e3")
+maxVel = 1000
+
+[node name="Camera2D" type="Camera2D" parent="PlayerBody"]
+position_smoothing_enabled = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="PlayerBody/Camera2D"]
+current = true
+
+[node name="UI" type="Control" parent="PlayerBody/Camera2D"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_j5wjh")
+
+[node name="queueCounter" type="Label" parent="PlayerBody/Camera2D/UI"]
+layout_mode = 0
+offset_left = -467.0
+offset_top = -260.0
+offset_right = -415.0
+offset_bottom = -237.0
+text = "Queue"
+
+[node name="customersServed" type="Label" parent="PlayerBody/Camera2D/UI"]
+layout_mode = 0
+offset_left = 293.0
+offset_top = -253.0
+offset_right = 451.0
+offset_bottom = -230.0
+text = "Customers Served: 0"
+
+[node name="Tutorial" type="Panel" parent="PlayerBody/Camera2D/UI"]
+layout_mode = 0
+offset_left = -183.0
+offset_top = -181.0
+offset_right = 171.0
+offset_bottom = -76.0
+
+[node name="Label" type="Label" parent="PlayerBody/Camera2D/UI/Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hold down space bar to pick up items
+Release space bar to put down items
+Careful of releasing space bar at the wrong time or you'll drop your item!"
+autowrap_mode = 3
+
+[node name="customerHandler" type="Node" parent="."]
+script = ExtResource("7_j5wjh")
+
+[node name="Spawn" type="Area2D" parent="customerHandler"]
+position = Vector2(703, -360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="customerHandler/Spawn"]
+position = Vector2(-46.5, 0)
+shape = SubResource("RectangleShape2D_vef74")
+debug_color = Color(0.992157, 0, 0.262745, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="customerHandler/Spawn"]
+stream = ExtResource("10_mfdv2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="customerHandler"]
+
+[node name="customerSeats" type="Node" parent="."]
+
+[node name="table1seat1" parent="customerSeats" node_paths=PackedStringArray("customerHandler") instance=ExtResource("6_eow3j")]
+position = Vector2(516, -61)
+rotation = 3.14159
+customerHandler = NodePath("../../customerHandler")
+
+[node name="table1seat2" parent="customerSeats" node_paths=PackedStringArray("customerHandler") instance=ExtResource("6_eow3j")]
+position = Vector2(642, -61)
+rotation = 3.14159
+customerHandler = NodePath("../../customerHandler")
+
+[node name="table2seat1" parent="customerSeats" node_paths=PackedStringArray("customerHandler") instance=ExtResource("6_eow3j")]
+position = Vector2(522, 263)
+rotation = 3.14159
+customerHandler = NodePath("../../customerHandler")
+
+[node name="table2seat2" parent="customerSeats" node_paths=PackedStringArray("customerHandler") instance=ExtResource("6_eow3j")]
+position = Vector2(648, 263)
+rotation = 3.14159
+customerHandler = NodePath("../../customerHandler")
+
+[node name="table3seat1" parent="customerSeats" node_paths=PackedStringArray("customerHandler") instance=ExtResource("6_eow3j")]
+position = Vector2(66, 257)
+rotation = 3.14159
+customerHandler = NodePath("../../customerHandler")
+
+[node name="table3seat2" parent="customerSeats" node_paths=PackedStringArray("customerHandler") instance=ExtResource("6_eow3j")]
+position = Vector2(-60, 257)
+rotation = 3.14159
+customerHandler = NodePath("../../customerHandler")
+
+[node name="table4seat1" parent="customerSeats" node_paths=PackedStringArray("customerHandler") instance=ExtResource("6_eow3j")]
+position = Vector2(-390, 257)
+rotation = -3.14159
+customerHandler = NodePath("../../customerHandler")
+
+[node name="table4seat2" parent="customerSeats" node_paths=PackedStringArray("customerHandler") instance=ExtResource("6_eow3j")]
+position = Vector2(-516, 257)
+rotation = 3.14159
+customerHandler = NodePath("../../customerHandler")
+
+[node name="gameHandler" type="Node" parent="."]
+script = ExtResource("12_iotsf")
+
+[node name="Timer" type="Timer" parent="gameHandler"]
+
+[connection signal="timeout" from="gameHandler/Timer" to="gameHandler" method="_on_timer_timeout"]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://cculndockjkrj"]
+
+[ext_resource type="Script" uid="uid://25o131ybvgrm" path="res://ChildScenes/itemProcesser.gd" id="1_oa8rw"]
+[ext_resource type="PackedScene" uid="uid://bnb2g3d26xqdl" path="res://ChildScenes/itemSprite.tscn" id="2_xkuyo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oa8rw"]
+size = Vector2(82.6667, 98.6667)
+
+[sub_resource type="GDScript" id="GDScript_oa8rw"]
+script/source = "extends Timer
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qka5q"]
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Node2D" type="Area2D"]
+script = ExtResource("1_oa8rw")
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+
+[node name="itemSprite" parent="." instance=ExtResource("2_xkuyo")]
+
+[node name="Marker2D" type="Marker2D" parent="itemSprite"]
+position = Vector2(0, 76)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 23)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_oa8rw")
+
+[node name="Timer" type="Timer" parent="."]
+script = SubResource("GDScript_oa8rw")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -62.0
+offset_top = -51.0
+offset_right = 2193.0
+offset_bottom = 189.0
+scale = Vector2(0.055, 0.055)
+theme_override_styles/fill = SubResource("StyleBoxFlat_qka5q")
+value = 50.0
+show_percentage = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

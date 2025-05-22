@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfijoqp7gdh7m"]
+
+[ext_resource type="Script" uid="uid://5the0cuc481v" path="res://ChildScenes/player.gd" id="1_wohca"]
+[ext_resource type="Texture2D" uid="uid://d1bb6bsn84gyo" path="res://Sprites/Characters/Nick.png" id="2_khecl"]
+[ext_resource type="PackedScene" uid="uid://bnb2g3d26xqdl" path="res://ChildScenes/itemSprite.tscn" id="3_muqv6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_feb5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_khecl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
+size = Vector2(64, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(64.7059, 100)
+
+[sub_resource type="AudioStream" id="AudioStream_i6ts8"]
+
+[node name="PlayerBody" type="RigidBody2D"]
+gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
+linear_damp = 1.0
+script = ExtResource("1_wohca")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_feb5d")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_e2o6t")
+
+[node name="PlayerArea" type="Area2D" parent="."]
+
+[node name="PlayerInteraction" type="CollisionShape2D" parent="PlayerArea"]
+position = Vector2(-9.53674e-07, 2.86102e-06)
+scale = Vector2(1.36, 1.36)
+shape = SubResource("RectangleShape2D_fc0e3")
+debug_color = Color(0.984314, 0, 0, 0)
+
+[node name="itemSprite" parent="." instance=ExtResource("3_muqv6")]
+position = Vector2(0, -15)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -1)
+stream = SubResource("AudioStream_i6ts8")

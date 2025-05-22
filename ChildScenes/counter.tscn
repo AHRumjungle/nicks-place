@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7ljqushwehll"]
+
+[ext_resource type="PackedScene" uid="uid://bnb2g3d26xqdl" path="res://ChildScenes/itemSprite.tscn" id="1_u435k"]
+
+[sub_resource type="GDScript" id="GDScript_eow3j"]
+script/source = "extends Area2D
+
+var item = \"\"
+
+func _ready() -> void:
+	$itemSprite.visible = false
+
+
+func player_interact(player : Object) -> void:
+	
+	if item == \"\":
+		if player.holdingItem != \"\":
+			item = player.holdingItem
+			$itemSprite.set_item(item)
+			$itemSprite.visible = true
+			player.update_item(\"\")
+	else:
+		if player.holdingItem == \"\":
+			player.holdingItem = item
+			$itemSprite.visible = false
+			player.update_item(item)
+			item = \"\"
+	
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5wjh"]
+size = Vector2(39, 49)
+
+[node name="Counter" type="Area2D"]
+script = SubResource("GDScript_eow3j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_j5wjh")
+
+[node name="itemSprite" parent="." instance=ExtResource("1_u435k")]

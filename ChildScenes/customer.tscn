@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=3 uid="uid://dri0bt05yo2ar"]
+
+[ext_resource type="Script" uid="uid://c63crfxwwa5f5" path="res://ChildScenes/customer.gd" id="1_ie1ck"]
+[ext_resource type="Texture2D" uid="uid://r5wsknvx7jli" path="res://Sprites/Characters/Alina.png" id="2_uhvvx"]
+[ext_resource type="Texture2D" uid="uid://cq2t5887huk00" path="res://Sprites/Characters/Andrius.png" id="3_7py8w"]
+[ext_resource type="Texture2D" uid="uid://dkwvyl4lehsna" path="res://Sprites/Characters/Andy.png" id="4_v04oe"]
+[ext_resource type="Texture2D" uid="uid://b3gk4gn6ysmo2" path="res://Sprites/Characters/Eric.png" id="5_srgrw"]
+[ext_resource type="Texture2D" uid="uid://x1n0ksj1n7hw" path="res://Sprites/Characters/Monte.png" id="6_666pl"]
+[ext_resource type="Texture2D" uid="uid://cmyoftvkkj1gr" path="res://Sprites/Characters/Nida.png" id="7_abauh"]
+[ext_resource type="PackedScene" uid="uid://bnb2g3d26xqdl" path="res://ChildScenes/itemSprite.tscn" id="8_uhvvx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ie1ck"]
+friction = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_psjla"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uhvvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7py8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v04oe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_srgrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_666pl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_abauh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq515"]
+size = Vector2(56, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ie1ck"]
+size = Vector2(92, 119)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fyy0"]
+bg_color = Color(1, 1, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Customer" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_ie1ck")
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_ie1ck")
+speed = 150
+
+[node name="customerSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_psjla")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_yq515")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 50.0
+target_desired_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_ie1ck")
+debug_color = Color(0.992157, 0, 0.235294, 0)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -28.0
+offset_top = -67.0
+offset_right = 1008.0
+offset_bottom = 151.0
+scale = Vector2(0.055, 0.055)
+theme_override_styles/fill = SubResource("StyleBoxFlat_7fyy0")
+value = 50.0
+show_percentage = false
+
+[node name="navTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="itemSprite" parent="." instance=ExtResource("8_uhvvx")]
+position = Vector2(0, -110)
+
+[connection signal="timeout" from="navTimer" to="." method="_on_nav_timer_timeout"]

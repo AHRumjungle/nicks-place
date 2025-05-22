@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b88ur3by5gkls"]
+
+[ext_resource type="Script" uid="uid://wcm6ocbwx0tj" path="res://ChildScenes/itemSource.gd" id="1_8rwy2"]
+[ext_resource type="Texture2D" uid="uid://bk3iv0n5dp532" path="res://Sprites/empty.png" id="2_nhsfi"]
+[ext_resource type="PackedScene" uid="uid://bnb2g3d26xqdl" path="res://ChildScenes/itemSprite.tscn" id="3_nhsfi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jktm"]
+size = Vector2(62.8205, 78.1764)
+
+[node name="itemSource" type="Area2D"]
+scale = Vector2(1.56, 1.53499)
+script = ExtResource("1_8rwy2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_nhsfi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.22266e-06, 0)
+shape = SubResource("RectangleShape2D_7jktm")
+
+[node name="itemSprite" parent="." instance=ExtResource("3_nhsfi")]

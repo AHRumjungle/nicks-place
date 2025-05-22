@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnb2g3d26xqdl"]
+
+[ext_resource type="Texture2D" uid="uid://efqc2unfn716" path="res://Sprites/Items/CoffeeEmpty.png" id="1_q7agh"]
+[ext_resource type="Texture2D" uid="uid://dkrhatin0i6kg" path="res://Sprites/Items/CoffeeFull.png" id="2_w4bsx"]
+[ext_resource type="Texture2D" uid="uid://xujopk6fhb1o" path="res://Sprites/Items/EmptyPlate.png" id="3_8wib8"]
+[ext_resource type="Script" uid="uid://duxdt16ifrou1" path="res://ChildScenes/itemSprite.gd" id="3_g28u8"]
+[ext_resource type="Texture2D" uid="uid://c3yy5f2qpwubn" path="res://Sprites/Items/Eggs&Bacon.png" id="4_cq7l8"]
+[ext_resource type="Texture2D" uid="uid://bty4202etf54p" path="res://Sprites/Items/Pancakes.png" id="5_jrorp"]
+[ext_resource type="Texture2D" uid="uid://br5gsioyvv0jt" path="res://Sprites/Items/Omlette.png" id="6_q2tln"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7mxwa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_q7agh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w4bsx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8wib8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cq7l8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jrorp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q2tln")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="itemSprite" type="AnimatedSprite2D"]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_7mxwa")
+script = ExtResource("3_g28u8")
